@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Adicionando Font Awesome -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+       
+        h1 {
+            margin: 0;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 150px); /* Ajuste conforme necessário para não sobrepor o footer */
+        }
+        section {
+    background: linear-gradient(to bottom, white,blue);
+    color: white; /* Definindo a cor do texto como branco para contrastar */
+    padding: 18px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            width: calc(50% - 5px);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+      
+    </style>
+</head>
+<body>
+    <div class="icone-voltar" onclick="window.location.href='index.html'">
+        <img class="logotipo" src="imagens/logo.png" alt="Voltar para o Início" width="80px">
+        <span class="icone-texto">Voltar para o Início</span>
+    </div>
+    <header>
+        <h1>Login</h1>
+        <nav>
+            <ul>
+                <li><a href="treino.html">Treino</a></li>
+                <li><a href="academia.html">Academia</a></li>
+                <li><a href="musculacao.html">Musculação</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="cadastro.html">cadastro</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h3  class="tauri-regular">Login</h3>
+            <form action="" method="post">
+                <label for="cpf">CPF:</label>
+                <input type="cpf" id="cpf" name="cpf" required> 
+                <br><br>
+                <label for="num_matricula">Numero da Matricula:</label>
+                <input type="num_matricula" id="num_matricula" name="num_matricula" required> 
+                <br><br>
+                <div class="button-container">
+                    <button type="submit">Entrar</button>
+                    <button type="button">Criar conta</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Site Academia</p>
+    </footer>
+</body>
+</html>
