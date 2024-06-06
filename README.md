@@ -1,1 +1,1 @@
-*** Plataforma Academia *** 
+***Plataforma Academia*** 
