@@ -1,3 +1,19 @@
+<?php
+    require_once '../models/aluno_class.php';
+    require_once '../models/alunoDAO.php';
+    if($_POST){
+        if(isset($_POST['nome']) && isset($_POST['cpf']) && isset($_POST['endereco']) && isset($_POST['numero']) && isset($_POST['email'])){
+            $aluno = new Aluno(nome:$_POST['nome'],email:$_POST['email'],cpf:$_POST['cpf']);
+
+            $alunoDAO = new AlunoDAO();
+            
+            $alunoDAO->insert_aluno($aluno);
+        }
+    }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,13 +32,13 @@
             align-items: center;
         }
         section {
-    background: linear-gradient(to bottom, white,blue);
-    color: white; /* Definindo a cor do texto como branco para contrastar */
-    padding: 18px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+            background: linear-gradient(to bottom, white,blue);
+            color: white; /* Definindo a cor do texto como branco para contrastar */
+            padding: 18px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
         select {
             width: 100%;
             padding: 10px;
@@ -31,10 +47,22 @@
             border-radius: 5px;
             box-sizing: border-box;
         }
+
+        input{
+            width: 100%;
+            padding: 5px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
+
         .button-container {
             display: flex;
             justify-content: space-between;
         }
+
         button {
             width: calc(50% - 5px);
             padding: 20px;
@@ -66,21 +94,28 @@
     <main>
         <section>
             <h3  class="tauri-regular">Cadastro</h3>
-            <form action="processar_cadastro.php" method="post">
+            <form action="cadastro.php" method="post">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required><br><br>
+
+                <label for="cpf">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br><br>
+
                 <label for="cpf">CPF:</label>
                 <input type="text" id="cpf" name="cpf" required>
                 <br><br>
+
                 <label for="endereco">Endereço:</label>
                 <input type="text" id="endereco" name="endereco" required>
                 <br><br>
-                <label for="numero">Numero:</label>
+
+                <label for="numero">Telefone:</label>
                 <input type="text" id="numero" name="numero" required>
                 <br><br>
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" required><br><br>
                 <div class="buttons-container">
                     <button type="submit">Criar</button>
-                    <button type="submit">Limpar</button>
+                    <button type="reset">Limpar</button>
                 </div>
             </form>
         </section>
