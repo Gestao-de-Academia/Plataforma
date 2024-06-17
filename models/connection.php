@@ -1,8 +1,8 @@
 <?php
 
 abstract class Conn{
-    public function __construct(){
-        $this->db = new PDO('myslq:host=localhost;dbname=gestao_academia;','root','');
+    public function __construct(protected $db=null){
+        $this->db = new PDO('mysql:host=localhost;dbname=gestao_academia;','root','');
     }
 }
 

@@ -1,3 +1,35 @@
+<?php
+    session_start();
+    require_once '../models/connection.php';
+    require_once '../models/pessoa_class.php';
+    require_once '../models/admin_class.php';
+    require_once '../models/adminDAO.php';
+
+    if($_POST){
+        $erro=false;
+        if(empty($_POST['username']) || empty($_POST['senha'])){
+            $erro=true;
+        }
+
+        if($erro === false){
+            $user = new User(id_user:0,nome:'',username: $_POST['username'], email:'', senha: md5($_POST['senha']),cpf:'');
+
+            $userDAO = new UserDAO();
+
+            $login = $userDAO->verify_user($user);
+
+            if(count($login) == 1){
+                $_SESSION['id_user'] = $login[0]->id_usuario;
+                $_SESSION['nome'] = $login[0]->nome;
+                $_SESSION['username'] = $login[0]->username;
+
+                header('Location: index.php');
+                exit;
+            }
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -27,7 +59,7 @@
     text-align: center;
 }
 
-        input[type="email"],
+        input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 5px 15px;
@@ -60,6 +92,7 @@
     </div>
     <header>
         <h1>Login</h1>
+        <h2><?= print_r($_SESSION)?></h2>
         <nav>
             <ul>
                 <li><a href="treino.html">Treino</a></li>
@@ -67,22 +100,23 @@
                 <li><a href="musculacao.html">Musculação</a></li>
                 <li><a href="login.html">Login</a></li>
                 <li><a href="cadastro.html">cadastro</a></li>
+                <li><a href="logout.php">Sair</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <section>
             <h3  class="tauri-regular">Login</h3>
-            <form action="" method="post">
-                <label for="email">Email:</label>
-                <input type="email" id="cpf" name="cpf" required> 
+            <form action="login.php" method="post">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required> 
                 <br><br>
-                <label for="num_matricula">Senha:</label>
-                <input type="password" id="num_matricula" name="num_matricula" required> 
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required> 
                 <br><br>
                 <div class="button-container">
-                    <button type="submit">Entrar</button>
-                    <button type="button">Criar conta</button>
+                    <input type="submit" value="Entrar"></button>
+                    <!-- <button type="button">Criar conta</button> -->
                 </div>
             </form>
         </section>

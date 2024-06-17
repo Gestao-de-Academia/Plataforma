@@ -1,3 +1,11 @@
+<?php
+  session_start();
+  if(!isset($_SESSION['id_user'])){
+    header('Location: login.php');
+    exit;
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -53,7 +61,7 @@
 
 /* Caption text */
 .text {
-  color: blavck; /* Mudando a cor do texto para branco para garantir visibilidade */
+  color: black; /* Mudando a cor do texto para branco para garantir visibilidade */
   font-size: 50px;
   padding: 8px 12px;
   position: absolute;
@@ -113,10 +121,6 @@
         <h1>Academia</h1>
         <nav>
           <ul>
-            <li><a href="treino.html">Treino</a></li>
-            <li><a href="academia.html">Academia</a></li>
-            <li><a href="musculacao.html">Musculação</a></li>
-            <li><a href="login.html">Login</a></li>
             <li><a href="cadastro.html">cadastro</a></li>
         </ul>
         </nav>

@@ -18,6 +18,16 @@
             $this->db=null;
         }
 
-        
+        public function getAllAlunos(){
+            $query = 'select * from alunos';
+
+            $stm = $this->db->prepare($query);
+
+            $stm->execute();
+
+            $this->db=null;
+
+            return $stm->fetchall(PDO::FECTH_OBJ);
+        }
     }
 ?>
