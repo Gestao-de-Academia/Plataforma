@@ -1,7 +1,7 @@
 <?php
     class User extends Pessoa{
-        public function __construct(private int $id_user=0, $nome, private string $username='', $email, private string $senha='',$cpf){
-            parent::__construct();
+        public function __construct(private int $id_user=0, $nome, private string $username='', $email, private string $senha=''){
+            parent::__construct($nome,$email);
         }
 
         public function get_id(){

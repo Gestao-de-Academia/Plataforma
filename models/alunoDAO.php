@@ -27,7 +27,7 @@
 
             $this->db=null;
 
-            return $stm->fetchall(PDO::FECTH_OBJ);
+            return $stm->fetchAll(PDO::FETCH_OBJ);
         }
     }
 ?>

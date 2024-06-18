@@ -1,13 +1,27 @@
 <?php
+    session_start();
+
+    if(!isset($_SESSION['id_user'])){
+      header('Location: login.php');
+      exit;
+    }
+    require_once '../models/connection.php';
+    require_once '../models/pessoa_class.php';
     require_once '../models/aluno_class.php';
     require_once '../models/alunoDAO.php';
+
     if($_POST){
-        if(isset($_POST['nome']) && isset($_POST['cpf']) && isset($_POST['endereco']) && isset($_POST['numero']) && isset($_POST['email'])){
-            $aluno = new Aluno(nome:$_POST['nome'],email:$_POST['email'],cpf:$_POST['cpf']);
+        if(isset($_POST['nome']) && isset($_POST['cpf']) && isset($_POST['email'])){
+            $aluno = new Aluno(0,nome:$_POST['nome'],email:$_POST['email'],cpf:$_POST['cpf']);
 
             $alunoDAO = new AlunoDAO();
             
-            $alunoDAO->insert_aluno($aluno);
+            $insert = $alunoDAO->insert_aluno($aluno);
+
+            if($insert){
+                header('Location: alunos.php');
+                exit;
+            }
         }
     }
 ?>
@@ -75,26 +89,18 @@
 
 </head>
 <body>
-    <div class="icone-voltar" onclick="window.location.href='index.html'">
+    <div class="icone-voltar">
         <img class="logotipo" src="imagens/logo.png" alt="Voltar para o Início" width="80px">
         <span class="icone-texto">Voltar para o Início</span>
     </div>
     <header>
         <h1>Cadastro</h1>
-        <nav>
-            <ul>
-                <li><a href="treino.html">Treino</a></li>
-                <li><a href="academia.html">Academia</a></li>
-                <li><a href="musculacao.html">Musculação</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="cadastro.html">cadastro</a></li>
-            </ul>
-        </nav>
+        <?php require_once 'nav.php';?>
     </header>
     <main>
         <section>
-            <h3  class="tauri-regular">Cadastro</h3>
-            <form action="cadastro.php" method="post">
+            <h3  class="tauri-regular">Cadastro de Alunos</h3>
+            <form action="cadastro_aluno.php" method="post">
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" name="nome" required><br><br>
 
@@ -106,16 +112,10 @@
                 <input type="text" id="cpf" name="cpf" required>
                 <br><br>
 
-                <label for="endereco">Endereço:</label>
-                <input type="text" id="endereco" name="endereco" required>
-                <br><br>
-
-                <label for="numero">Telefone:</label>
-                <input type="text" id="numero" name="numero" required>
                 <br><br>
                 <div class="buttons-container">
-                    <button type="submit">Criar</button>
-                    <button type="reset">Limpar</button>
+                    <input type="submit" value="Cadastrar">
+                    <input type="reset" value="Resetar">
                 </div>
             </form>
         </section>

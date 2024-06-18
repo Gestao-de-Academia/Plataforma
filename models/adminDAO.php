@@ -4,20 +4,21 @@
             parent::__construct();
         }
 
-        public function insert_user($user){
-            $query = 'insert into usuarios (nome,username,email,senha,cpf) values (?,?,?,?,?)';
-
+        public function insert_user($user) {
+            $query = 'INSERT INTO usuarios (nome, username, email, senha) VALUES (?, ?, ?, ?)';
+    
             $stm = $this->db->prepare($query);
-
-            $stm->bindValue(1,$user->get_nome());
-            $stm->bindValue(2,$user->get_username());
-            $stm->bindValue(3,$user->get_email());
-            $stm->bindValue(4,$user->get_senha());
-            $stm->bindValue(5,$user->get_cpf());
-
-            $stm->execute();
-
-            $this->db=null;
+    
+            $stm->bindValue(1, $user->get_nome());
+            $stm->bindValue(2, $user->get_username());
+            $stm->bindValue(3, $user->get_email());
+            $stm->bindValue(4, $user->get_senha());
+    
+            $result = $stm->execute();
+    
+            $this->db = null;
+    
+            return $result;
         }
 
         public function verify_user($user){
@@ -34,6 +35,18 @@
 
             return $stm->fetchAll(PDO::FETCH_OBJ);
 
+        }
+
+        public function getAllUsers(){
+            $query = 'select * from usuarios';
+    
+            $stm = $this->db->prepare($query);
+    
+            $stm->execute();
+    
+            $this->db = null;
+    
+            return $stm->fetchAll(PDO::FETCH_OBJ);
         }
 
     }
