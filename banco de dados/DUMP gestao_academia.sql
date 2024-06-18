@@ -1,17 +1,16 @@
 /*
-SQLyog Community v13.1.7 (64 bit)
-MySQL - 10.4.32-MariaDB : Database - gestao_academia
+SQLyog Enterprise - MySQL GUI v8.12 
+MySQL - 5.5.5-10.4.32-MariaDB : Database - gestao_academia
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
 /*!40101 SET SQL_MODE=''*/;
 
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`gestao_academia` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 USE `gestao_academia`;
@@ -26,9 +25,11 @@ CREATE TABLE `alunos` (
   `email` varchar(50) DEFAULT NULL,
   `cpf` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id_aluno`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `alunos` */
+
+insert  into `alunos`(`id_aluno`,`nome`,`email`,`cpf`) values (1,'carlos','carlos@email.com','999999999'),(2,'rafael','rafael@email.com','999999999'),(3,'ana','ana@email.com','999999999'),(4,'jose','jose@email.com','888888888'),(5,'maria','maria@email.com','7777777'),(6,'eduardo','eduardo@email.com','7777777');
 
 /*Table structure for table `cidades` */
 
@@ -78,9 +79,11 @@ CREATE TABLE `matriculas` (
   KEY `id_plano` (`id_plano`),
   CONSTRAINT `matriculas_ibfk_1` FOREIGN KEY (`id_aluno`) REFERENCES `alunos` (`id_aluno`),
   CONSTRAINT `matriculas_ibfk_2` FOREIGN KEY (`id_plano`) REFERENCES `planos` (`id_plano`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `matriculas` */
+
+insert  into `matriculas`(`id_matricula`,`data_inicio`,`data_final`,`id_aluno`,`id_plano`) values (1,'2024-06-18','2024-07-18',1,1),(2,'2024-06-18','2024-09-18',2,2),(3,'2024-06-18','2024-12-18',3,3),(4,'2024-06-18','2025-06-18',4,4);
 
 /*Table structure for table `planos` */
 
@@ -91,9 +94,11 @@ CREATE TABLE `planos` (
   `descricao` varchar(50) DEFAULT NULL,
   `periodicidade` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_plano`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `planos` */
+
+insert  into `planos`(`id_plano`,`descricao`,`periodicidade`) values (1,'Plano Mensal','1 mes'),(2,'Plano Trimestral','3 meses'),(3,'Plano Semestral','6 meses'),(4,'Plano Anual','12 meses');
 
 /*Table structure for table `telefones` */
 
@@ -120,13 +125,12 @@ CREATE TABLE `usuarios` (
   `username` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `senha` varchar(100) DEFAULT NULL,
-  `cpf` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `usuarios` */
 
+insert  into `usuarios`(`id_usuario`,`nome`,`username`,`email`,`senha`) values (1,'admin','admin','admin@email.com','202cb962ac59075b964b07152d234b70'),(2,'','teste','','202cb962ac59075b964b07152d234b70'),(3,'teste2','teste2','teste@email.com','202cb962ac59075b964b07152d234b70');
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
